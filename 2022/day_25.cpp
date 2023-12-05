@@ -88,13 +88,6 @@ RETURN_TYPE part1(TYPE& inp) {
     return convert(res);
 }
 
-
-RETURN_TYPE part2(TYPE& inp) {
-    int res = 0;
-
-    return "";
-}
-
 int main() {
     TYPE test_inp = parse_input(YEAR "/tests/day_" DAY ".txt");
     TYPE inp = parse_input(YEAR "/inputs/day_" DAY ".txt");
@@ -114,16 +107,6 @@ int main() {
 
     test_inp = parse_input(YEAR "/tests/day_" DAY ".txt");
     inp = parse_input(YEAR "/inputs/day_" DAY ".txt");
-
-    std::cout << std::endl;
-    auto expected_result_part2 = get_expected_result(YEAR "/tests/results/day_" DAY "_2.txt");
-
-    res = part2(test_inp);
-    evaluate_results(res, expected_result_part2);
-    res = part2(inp);
-    std::set<RETURN_TYPE> tried2;
-    tried_before(res, tried2);
-    std::cout << "Part 2: " << res << std::endl;
 
     return 0;
 }

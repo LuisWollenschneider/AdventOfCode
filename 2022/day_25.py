@@ -66,21 +66,9 @@ def solve_l1(input_str) -> Optional[int]:  # input data will be passed to this a
     return convert_to_str(ans)  # if 'ans' is None answer won't be submitted, else it will submit after confirmation
 
 
-@aoc_comm(settings, level=2)
-def solve_l2(input_str) -> Optional[int]:
-    inp = parse_input(input_str)
-
-    ans = None
-    for ee in inp:
-        pass
-
-    return ans
-
-
 def main():
     # create_test_file(settings, int(input("Test file for level: ")), input("Test result: ").strip())
     solve_l1()
-    solve_l2()
 
 
 if __name__ == '__main__':
