@@ -154,13 +154,12 @@ pub mod utils {
         let test_result = func(&test_input);
         let duration = start.elapsed();
 
-        if test_result.trim().to_string().eq("") {
-            println!("{}Not Implemented!{}", RED, RESET);
+        println!("{}Done!{}", LIGHT_GREEN, RESET);
 
+        if test_result.trim().to_string().eq("") {
+            println!("{}Not Implemented!{}", DARK_ORANGE, RESET);
             return;
         }
-
-        println!("{}Done!{}", LIGHT_GREEN, RESET);
 
         println!("{}Duration: {}{}", DARK_ORANGE, format_time(duration), RESET);
 
