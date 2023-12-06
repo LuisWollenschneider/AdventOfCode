@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from utils import aoc_comm, create_test_file
+from utils_py import aoc_comm, create_test_file
 import os
 from typing import Optional
 import re
