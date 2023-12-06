@@ -2,6 +2,8 @@
 pub mod utils {
     use std::fs::File;
     use std::io::{BufRead, BufReader, Read, Write};
+    use std::io;
+    use regex::Regex;
 
     const BLUE: &str = "\x1b[94m";
     const RED: &str = "\x1b[91m";
@@ -24,7 +26,7 @@ pub mod utils {
             input.push('\n');
         }
 
-        input
+        input.trim().to_string()
     }
 
     fn check_if_file_exists(file_path: &String) -> bool {
@@ -37,19 +39,22 @@ pub mod utils {
         }
     }
 
+    fn get_cookie() -> String {
+        let file = File::open("../../aoc_cookie.json").unwrap();
+        let reader = BufReader::new(file);
+        let json: serde_json::Value = serde_json::from_reader(reader).unwrap();
+        // get cookie with key: "aoc-session-cookie"
+
+        json["aoc-session-cookie"].as_str().unwrap().to_string()
+    }
+
     fn fetch_input(year: i32, day: i32) -> () {
         println!("{}Fetching input for day {}{}{}...", YELLOW, PINK, day, RESET);
 
         let file_path = format!("../inputs/day_{:02}.txt", day);
         let url = format!("https://adventofcode.com/{}/day/{}/input", year, day);
 
-        // read json file with cookie
-        let file = File::open("../../aoc_cookie.json").unwrap();
-        let reader = BufReader::new(file);
-        let json: serde_json::Value = serde_json::from_reader(reader).unwrap();
-        // get cookie with key: "aoc-session-cookie"
-
-        let cookie = json["aoc-session-cookie"].as_str().unwrap();
+        let cookie = get_cookie();
 
         let mut headers = reqwest::header::HeaderMap::new();
         headers.insert(reqwest::header::COOKIE, format!("session={}", cookie).parse().unwrap());
@@ -66,6 +71,64 @@ pub mod utils {
 
         let mut file = File::create(&file_path).unwrap();
         file.write_all(input.as_bytes()).unwrap();
+    }
+
+    fn submit_answer(year: i32, day: i32, part: i32, answer: String) -> () {
+        let url = format!("https://adventofcode.com/{}/day/{}/answer", year, day);
+
+        let cookie = get_cookie();
+
+        let mut headers = reqwest::header::HeaderMap::new();
+        headers.insert(reqwest::header::COOKIE, format!("session={}", cookie).parse().unwrap());
+
+        let client = reqwest::blocking::Client::new();
+        let mut response = client
+            .post(&url)
+            .headers(headers)
+            .form(&[("level", part.to_string()), ("answer", answer)])
+            .send()
+            .unwrap();
+
+        let mut resp = String::new();
+        response.read_to_string(&mut resp).unwrap();
+
+        let re = Regex::new(r"article>(.*)</article").unwrap();
+        let resp = re.captures(&resp).unwrap()[1].to_string();
+        let re = Regex::new(r"<a href.*?</a>").unwrap();
+        let resp = re.replace_all(&resp, "");
+        let resp = resp.replace("<p>", "").replace("</p>", "");
+
+        if resp.contains("That's the right answer") {
+            println!("{}That's the right answer!{}", YELLOW, RESET);
+        } else if resp.contains("That's not the right answer") {
+            println!("{}That's not the right answer!{}", RED, RESET);
+        } else if resp.contains("Did you already complete it?") {
+            println!("{}Already submitted!{}", DARK_ORANGE, RESET);
+        } else {
+            println!("{}Unknown response:{}", RED, RESET);
+            println!("{}", resp);
+        }
+    }
+
+    fn format_time(duration: std::time::Duration) -> String {
+        let mut res: String = "".to_string();
+        let secs = duration.as_secs();
+        if secs > 0 {
+            res.push_str(&format!("{}{}{}s ", PINK, secs, DARK_ORANGE));
+        }
+        let millis = duration.subsec_millis() % 1000;
+        if millis > 0 {
+            res.push_str(&format!("{}{}{}ms ", PINK, millis, DARK_ORANGE));
+        }
+        let micros = duration.subsec_micros() % 1000;
+        if micros > 0 {
+            res.push_str(&format!("{}{}{}μs ", PINK, micros, DARK_ORANGE));
+        }
+        let nanos = duration.subsec_nanos() % 1000;
+        if nanos > 0 {
+            res.push_str(&format!("{}{}{}ns ", PINK, nanos, DARK_ORANGE));
+        }
+        res
     }
 
     pub fn wrapper(func: fn(&String) -> String, year: i32, day: i32, part: i32) {
@@ -85,7 +148,15 @@ pub mod utils {
             .trim()
             .to_string();
 
+        print!("{}Running tests for part {}{}{}... ", BLUE, PINK, part, BLUE);
+
+        let start = std::time::Instant::now();
         let test_result = func(&test_input);
+        let duration = start.elapsed();
+
+        println!("{}Done!{}", LIGHT_GREEN, RESET);
+
+        println!("{}Duration: {}{}", DARK_ORANGE, format_time(duration), RESET);
 
         if test_result == expected_result {
             println!("\t{}TEST PASSED!{}", LIGHT_GREEN, RESET);
@@ -103,7 +174,26 @@ pub mod utils {
         }
         let input = get_input(&input_file_path);
 
+
+        print!("{}Running tests for part {}{}{}... ", BLUE, PINK, part, BLUE);
+
+        let start = std::time::Instant::now();
         let result = func(&input);
-        println!("{}Result - Part {}{}{}: {}{}{}", BLUE, PINK, part, BLUE, LIGHT_GREEN, result, RESET);
+        let duration = start.elapsed();
+
+        println!("{}Done!{}", LIGHT_GREEN, RESET);
+
+        println!("{}Duration: {}{}", DARK_ORANGE, format_time(duration), RESET);
+
+        println!("{}Submit answer {}{}{} for part {}{}{}? {}", BLUE, LIGHT_GREEN, result, BLUE, PINK, part, BLUE, RESET);
+
+        let mut inp = String::new();
+        io::stdin().read_line(&mut inp).unwrap();
+
+        if inp.trim().to_lowercase().eq("y") {
+            submit_answer(year, day, part, result);
+        }
+
+        println!();
     }
 }
