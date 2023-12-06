@@ -6,7 +6,7 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 
 | Year          | Stars ⭐️ |
 |---------------|----------|
-| [2023](#2023) | **10**   |
+| [2023](#2023) | **12**   |
 | [2022](#2022) | **50**   |
 | [2021](#2021) | **42**   |
 | [2020](#2020) | **31**   |
@@ -22,6 +22,7 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 | 3   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png) [Solution](2023/day_03.py) |
 | 4   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png) [Solution](2023/day_04.py) |
 | 5   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png) [Solution](2023/day_05.py) |
+| 6   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png) [Solution](2023/day_06.py) |
 
 ## 2022
 
