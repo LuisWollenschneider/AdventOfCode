@@ -2,3 +2,4 @@ aoc_cookie.json
 .idea
 .DS_Store
 **/__pycache__
+**/target
