@@ -145,17 +145,21 @@ class AOCCommunicator:
         start = time.time()
         ans = func(inp)
         end = time.time()
-        print(f"{BLUE}Done!{RESET}")
+        print(f"{LIGHT_GREEN}Done!{RESET}")
+
+        if ans is None:
+            print(f"{DARK_ORANGE}Not Implemented!{RESET}")
+            return
+
         if self.debug:
             print(f"{GREEN}<DBG> {DARK_ORANGE}Time taken: {PINK}{format_time(end - start)}{RESET}")
-        if ans is None:
-            print(f"{DARK_ORANGE}TEST - NO OUTPUT!{RESET}")
-        elif str(ans) == res:
+        if str(ans) == res:
             print(f"\t{LIGHT_GREEN}TEST PASSED!{RESET}")
         else:
             print(f"\t{RED}TEST FAILED!{RESET}\n"
                   f"\t\t{DARK_ORANGE}Expected: {RED}{res}{RESET}\n"
                   f"\t\t{DARK_ORANGE}Output:   {RED}{ans}{RESET}")
+            exit(1)
 
     def get_input_file(self, year, day, force=False):
         file_name = f"../{year}/inputs/day_{day :0>2}.txt"
@@ -245,17 +249,20 @@ def aoc_comm(settings, level, *, debug=False):
             print(f"{BLUE}Done!{RESET}")
             if debug:
                 print(f"{GREEN}<DBG> {DARK_ORANGE}Time taken: {PINK}{format_time(end - start)}{RESET}")
-            if (ans is None) or ("y" != input(f"{BLUE}Submit answer {LIGHT_GREEN}{ans}{BLUE} for level {PINK}{level}{BLUE}?{RESET} ")):
+            if (ans is None) or ("y" != input(f"{BLUE}Submit answer {LIGHT_GREEN}{ans}{BLUE} for part {PINK}{level}{BLUE}?{RESET} ")):
                 print(f"{DARK_ORANGE}Answer for level - {PINK}{level}{DARK_ORANGE} not submitted{RESET}")
-                return
-            response = comm.submit_answer(settings['year'], settings['day'], level, ans)
-            resp = f"{ORANGE}Response from AoC:{RESET} "
-            if "That's the right answer!" in response:
-                print(resp + f"{YELLOW}That's the right answer!{RESET}")
-                return
-            elif "That's not the right answer" in response:
-                print(resp + f"{RED}That's not the right answer{RESET}")
-                return
-            print(resp + f"{RED}Unknown response{RESET}")
+            else:
+                response = comm.submit_answer(settings['year'], settings['day'], level, ans)
+                resp = f"{ORANGE}Response from AoC:{RESET} "
+                if "That's the right answer!" in response:
+                    print(resp + f"{YELLOW}That's the right answer!{RESET}")
+                elif "That's not the right answer" in response:
+                    print(resp + f"{RED}That's not the right answer!{RESET}")
+                elif "Did you already complete it?" in response:
+                    print(resp + f"{DARK_ORANGE}Already submitted!{RESET}")
+                else:
+                    print(resp + f"{RED}Unknown response:{RESET}")
+                    print(response)
+            print()
         return wrapper
     return deco
