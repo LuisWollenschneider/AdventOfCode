@@ -1,11 +1,12 @@
 use utils_rust::utils::wrapper;
 
 const DAY: i32 = 6;
+const YEAR: i32 = 2023;
 
 #[warn(unused_variables)]
 fn main() {
-    wrapper(part_1, DAY, 1);
-    wrapper(part_2, DAY, 2);
+    wrapper(part_1, YEAR, DAY, 1);
+    wrapper(part_2, YEAR, DAY, 2);
 }
 
 fn part_1(input: &String) -> String {
