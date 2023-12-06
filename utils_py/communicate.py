@@ -206,28 +206,29 @@ def create_test_file(settings: dict, level: int, content: str = "") -> None:
 def format_time(td: float) -> str:
     res = ""
     days = int(td // (24 * 3600))
+    hours = int((td % (24 * 3600)) // 3600)
+    minutes = int((td % 3600) // 60)
+    seconds = int(td % 60)
+    milliseconds = int(td % 1 * 1e3)
+    microsecond = int(td % 1e-3 * 1e6)
+    nanoseconds = int(td % 1e-6 * 1e9)
+
     if days:
         res += f"{days}{DARK_ORANGE}d{PINK} "
-    hours = int((td % (24 * 3600)) // 3600)
-    if hours:
+    if hours or (res and any([minutes, seconds, milliseconds, microsecond, nanoseconds])):
         res += f"{hours}{DARK_ORANGE}h{PINK} "
-    minutes = int((td % 3600) // 60)
-    if minutes:
+    if minutes or (res and any([seconds, milliseconds, microsecond, nanoseconds])):
         res += f"{minutes}{DARK_ORANGE}m{PINK} "
-    seconds = int(td % 60)
-    if seconds:
+    if seconds or (res and any([milliseconds, microsecond, nanoseconds])):
         res += f"{seconds}{DARK_ORANGE}s{PINK} "
-    milliseconds = int(td % 1 * 1e3)
-    if milliseconds:
-        res += f"{milliseconds}{DARK_ORANGE}µs{PINK} "
-    nanoseconds = int(td % 1e-3 * 1e6)
+    if milliseconds or (res and any([microsecond, nanoseconds])):
+        res += f"{milliseconds}{DARK_ORANGE}ms{PINK} "
+    if microsecond or (res and nanoseconds):
+        res += f"{microsecond}{DARK_ORANGE}µs{PINK} "
     if nanoseconds:
         res += f"{nanoseconds}{DARK_ORANGE}ns{PINK} "
-    picoseconds = int(td % 1e-6 * 1e9)
-    if picoseconds:
-        res += f"{picoseconds}{DARK_ORANGE}ps{PINK} "
     if not res:
-        res = f"{td % 1e-9 * 1e9:.3f}e-9{DARK_ORANGE}s{PINK}"
+        res = f"{td % 1e-9 * 1e12:.3f}e-9{DARK_ORANGE}s{PINK}"
     return res
 
 

@@ -113,19 +113,20 @@ pub mod utils {
     fn format_time(duration: std::time::Duration) -> String {
         let mut res: String = "".to_string();
         let secs = duration.as_secs();
+        let millis = duration.subsec_millis() % 1000;
+        let micros = duration.subsec_micros() % 1000;
+        let nanos = duration.subsec_nanos() % 1000;
+        
         if secs > 0 {
             res.push_str(&format!("{}{}{}s ", PINK, secs, DARK_ORANGE));
         }
-        let millis = duration.subsec_millis() % 1000;
-        if millis > 0 {
+        if millis > 0 || (!res.is_empty() && (micros > 0 || nanos > 0)) {
             res.push_str(&format!("{}{}{}ms ", PINK, millis, DARK_ORANGE));
         }
-        let micros = duration.subsec_micros() % 1000;
-        if micros > 0 {
+        if micros > 0 || (!res.is_empty() && nanos > 0) {
             res.push_str(&format!("{}{}{}μs ", PINK, micros, DARK_ORANGE));
         }
-        let nanos = duration.subsec_nanos() % 1000;
-        if nanos > 0 {
+        if nanos > 0 || !res.is_empty() {
             res.push_str(&format!("{}{}{}ns ", PINK, nanos, DARK_ORANGE));
         }
         res
@@ -198,7 +199,5 @@ pub mod utils {
         if inp.trim().to_lowercase().eq("y") {
             submit_answer(year, day, part, result);
         }
-
-        println!();
     }
 }
