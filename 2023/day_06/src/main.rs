@@ -1,53 +1,18 @@
-use std::fs::File;
-use std::io::{BufRead, BufReader};
+use utils_rust::utils::wrapper;
 
 #[warn(unused_variables)]
 fn main() {
-    let file_path: &str = "../inputs/day_06.txt";
-    let test_file_path: &str = "../tests/day_06.txt";
-
-    let input = read_file(file_path);
-    let test_input = read_file(test_file_path);
-
-    // PART 1
-
-    let expected_result: u64 = read_file("../tests/results/day_06_1.txt")[0]
-        .parse()
-        .unwrap();
-
-    let test_result = part_1(&test_input);
-
-    if test_result == expected_result {
-        println!("Test successful!");
-    } else {
-        println!("Test failed!\n\tGot {}\n\tExpected {}", test_result, expected_result);
-        std::process::exit(1);
-    }
-
-    let result = part_1(&input);
-    println!("Result: {}", result);
-
-    // PART 2
-
-    let expected_result: u64 = read_file("../tests/results/day_06_2.txt")[0]
-        .parse()
-        .unwrap();
-
-    let test_result = part_2(test_input);
-
-    if test_result == expected_result {
-        println!("Test successful!");
-    } else {
-        println!("Test failed!\n\tGot {}\n\tExpected {}", test_result, expected_result);
-        std::process::exit(1);
-    }
-
-    let result = part_2(input);
-    println!("Result: {}", result);
+    wrapper(part_1, 6, 1);
+    wrapper(part_2, 6, 2);
 }
 
-fn part_1(input: &Vec<String>) -> u64 {
+fn part_1(input: &String) -> String {
     let mut result: u64 = 1;
+
+    let input = input
+        .lines()
+        .map(|line| line.to_string())
+        .collect::<Vec<String>>();
 
     let input: Vec<_> = input
         .iter()
@@ -76,11 +41,16 @@ fn part_1(input: &Vec<String>) -> u64 {
         result *= s;
     }
 
-    result
+    result.to_string()
 }
 
-fn part_2(input: Vec<String>) -> u64 {
+fn part_2(input: &String) -> String {
     let mut result: u64 = 0;
+
+    let input = input
+        .lines()
+        .map(|line| line.to_string())
+        .collect::<Vec<String>>();
 
     let input: Vec<_> = input
         .iter()
@@ -99,18 +69,5 @@ fn part_2(input: Vec<String>) -> u64 {
         }
     }
 
-    result
-}
-
-fn read_file(file_path: &str) -> Vec<String> {
-    let file = File::open(file_path).expect("File not found");
-    let reader = BufReader::new(file);
-
-    let mut input: Vec<String> = Vec::new();
-
-    for line in reader.lines() {
-        input.push(line.unwrap());
-    }
-
-    input
+    result.to_string()
 }

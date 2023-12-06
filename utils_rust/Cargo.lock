@@ -3,12 +3,5 @@
 version = 3
 
 [[package]]
-name = "day_06"
-version = "0.1.0"
-dependencies = [
- "utils_rust",
-]
-
-[[package]]
 name = "utils_rust"
 version = "0.1.0"
