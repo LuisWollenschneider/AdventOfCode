@@ -9,11 +9,6 @@ fn main() {
     wrapper(part_2, YEAR, DAY, 2);
 }
 
-struct Hand {
-    bid: u64,
-    rank: u64,
-}
-
 #[allow(unused_variables)]
 fn part_1(input: &String) -> String {
     solve(input, 11)
@@ -29,37 +24,55 @@ fn solve(input: &String, j: u64) -> String {
         .lines()
         .map(|line| {
             let (cards, bid) = line.split_once(" ").unwrap();
+
+            // precalculate hand value
+            // 0xR_12345, R: rank, 1-5: card values
             let mut rank: u64 = 0;
 
-            // let mut freq: HashMap<u64, u64> = HashMap::new();
+            // save frequency of each card as 3 bits
+            // AKQ(J)T98765432(Joker)
+            //    P1            P2
             let mut freq: u64 = 0;
-            let _ = cards.chars()
-                .map(|c| {
-                    let n = match c {
-                        'T' => 10,
-                        'J' => j,
-                        'Q' => 12,
-                        'K' => 13,
-                        'A' => 14,
-                        _ => c.to_string().parse::<u64>().unwrap()
-                    };
-                    freq += 1 << (n - 1) * 3;
-                    // freq.insert(n, freq.get(&n).unwrap_or(&0) + 1);
-                    rank = rank << 4 | n;
-                })
-                .collect::<Vec<_>>();
+
+            for c in cards.chars() {
+                let n = match c {
+                    'T' => 10,
+                    'J' => j,
+                    'Q' => 12,
+                    'K' => 13,
+                    'A' => 14,
+                    _ => c as u64 - '0' as u64
+                };
+                freq += 1 << (n - 1) * 3;
+
+                rank <<= 4;
+                rank |= n;
+            }
             let bid = bid.parse::<u64>().unwrap();
 
+            // extract jokers
             let jokers = freq & 0b111;
 
-            let mut freq = (1 .. 14)
-                .map(|i| (freq >> (i * 3)) & 0b111)
-                .collect::<Vec<u64>>();
+            // 2 highest frequencies
+            let mut m1 = 0;
+            let mut m2 = 0;
+            for _ in 1..14 {
+                freq >>= 3;
+                let f = freq & 0b111;
+                if f == 0 {
+                    continue;
+                }
+                if f > m1 {
+                    m2 = m1;
+                    m1 = f;
+                } else if f > m2 {
+                    m2 = f;
+                }
+            }
 
-            freq.sort();
-            freq.reverse();
-
-            rank |= match (freq[0] + jokers, freq[1]) {
+            // jokers = 0 for part 1
+            // R value of hand value
+            rank |= match (m1 + jokers, m2) {
                 (5, _) => 0x7_00000,
                 (4, _) => 0x6_00000,
                 (3, 2) => 0x5_00000,
@@ -69,17 +82,19 @@ fn solve(input: &String, j: u64) -> String {
                 _ => 0x1_00000,
             };
 
-            Hand { bid, rank }
+            (bid, rank)
         })
-        .collect::<Vec<Hand>>();
+        .collect::<Vec<(u64, u64)>>();
 
-    hands.sort_by_cached_key(|hand| hand.rank);
+    // use cached sorting
+    hands.sort_by_cached_key(|(_, rank)| *rank);
 
+    // calculate total score
     hands
         .iter()
         .enumerate()
-        .map(|(i, hand)| {
-            hand.bid * (i as u64 + 1)
+        .map(|(i, (bid, _))| {
+            bid * (i as u64 + 1)
         })
         .sum::<u64>()
         .to_string()
