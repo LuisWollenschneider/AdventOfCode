@@ -6,7 +6,7 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 
 | Year          | Stars ⭐️ |
 |---------------|----------|
-| [2023](#2023) | **12**   |
+| [2023](#2023) | **14**   |
 | [2022](#2022) | **50**   |
 | [2021](#2021) | **42**   |
 | [2020](#2020) | **31**   |
@@ -23,6 +23,7 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 | 4   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png) [Solution](2023/day_04.py)                                                                                                                                                                                                     |
 | 5   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png) [Solution](2023/day_05.py) / ![Rust](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/14px-Rust_programming_language_black_logo.svg.png) [Solution](2023/day_05/src/main.rs) |
 | 6   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png) [Solution](2023/day_06.py) / ![Rust](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/14px-Rust_programming_language_black_logo.svg.png) [Solution](2023/day_06/src/main.rs) |
+| 7   | ![Rust](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/14px-Rust_programming_language_black_logo.svg.png) [Solution](2023/day_07/src/main.rs)                                                                                                                                                          |
 
 ## 2022
 
