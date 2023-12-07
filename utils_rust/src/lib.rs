@@ -39,6 +39,16 @@ pub mod utils {
         }
     }
 
+    fn result_prompt(file_path: &String, part: i32) -> () {
+        println!("{}Enter expected result for part {}{}{}:{}", BLUE, PINK, part, BLUE, RESET);
+
+        let mut inp = String::new();
+        io::stdin().read_line(&mut inp).unwrap();
+
+        let mut file = File::create(file_path).unwrap();
+        file.write_all(inp.trim().as_bytes()).unwrap();
+    }
+
     fn get_cookie() -> String {
         let file = File::open("../../aoc_cookie.json").unwrap();
         let reader = BufReader::new(file);
@@ -49,7 +59,7 @@ pub mod utils {
     }
 
     fn fetch_input(year: i32, day: i32) -> () {
-        println!("{}Fetching input for day {}{}{}...", YELLOW, PINK, day, RESET);
+        println!("{}Fetching input for day {}{}{}...{}", YELLOW, PINK, day, YELLOW, RESET);
 
         let file_path = format!("../inputs/day_{:02}.txt", day);
         let url = format!("https://adventofcode.com/{}/day/{}/input", year, day);
@@ -143,13 +153,13 @@ pub mod utils {
         // check if test result file exists
         let test_result_file_path = format!("../tests/results/day_{:02}_{}.txt", day, part);
         if !check_if_file_exists(&test_result_file_path) {
-            std::process::exit(1);
+            result_prompt(&test_result_file_path, part);
         }
         let expected_result = get_input(&test_result_file_path)
             .trim()
             .to_string();
 
-        print!("{}Running tests for part {}{}{}... ", BLUE, PINK, part, BLUE);
+        print!("{}Running tests for part {}{}{}...{} ", BLUE, PINK, part, BLUE, RESET);
 
         let start = std::time::Instant::now();
         let test_result = func(&test_input);
@@ -181,7 +191,7 @@ pub mod utils {
         let input = get_input(&input_file_path);
 
 
-        print!("{}Running tests for part {}{}{}... ", BLUE, PINK, part, BLUE);
+        print!("{}Running tests for part {}{}{}... {}", BLUE, PINK, part, BLUE, RESET);
 
         let start = std::time::Instant::now();
         let result = func(&input);
