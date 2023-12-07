@@ -191,7 +191,7 @@ pub mod utils {
         let input = get_input(&input_file_path);
 
 
-        print!("{}Running tests for part {}{}{}... {}", BLUE, PINK, part, BLUE, RESET);
+        print!("{}Running part {}{}{}... {}", BLUE, PINK, part, BLUE, RESET);
 
         let start = std::time::Instant::now();
         let result = func(&input);
