@@ -13,8 +13,6 @@ fn main() {
 #[allow(unused_variables)]
 #[allow(unreachable_code)]
 fn part_1(input: &String) -> String {
-    return "".to_string();
-
     let (instructions, nodes) = parse_input(input);
 
     let mut current = convert_node("AAA");
