@@ -4,14 +4,14 @@ This repository contains my solutions to the [Advent of Code](https://adventofco
 
 ## Summary
 
-| Year          | Stars ⭐️ |
-|---------------|----------|
-| [2023](#2023) | **18**   |
-| [2022](#2022) | **50**   |
-| [2021](#2021) | **42**   |
-| [2020](#2020) | **31**   |
-| [2019](#2019) | **3**    |
-| [2018](#2018) | **6**    |
+| Year          | Stars ⭐️ | Languages                                                                                                                                                                                                                                                                                   |
+|---------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [2023](#2023) | **18**   | ![Rust](https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/14px-Rust_programming_language_black_logo.svg.png) / ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png) |
+| [2022](#2022) | **50**   | ![C++](https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/14px-ISO_C%2B%2B_Logo.svg.png) / ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png)                                          |
+| [2021](#2021) | **42**   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png)                                                                                                                                                                 |
+| [2020](#2020) | **31**   | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png)                                                                                                                                                                 |
+| [2019](#2019) | **3**    | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png)                                                                                                                                                                 |
+| [2018](#2018) | **6**    | ![Python](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png)                                                                                                                                                                 |
 
 ## 2023
 
