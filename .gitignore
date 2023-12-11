@@ -3,3 +3,10 @@ aoc_cookie.json
 .DS_Store
 **/__pycache__
 **/target
+
+# Test files etc.
+generate.py
+list.h
+utils.h
+2023/day_01.c
+2023/Makefile
