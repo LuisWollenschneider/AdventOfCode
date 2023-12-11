@@ -42,7 +42,7 @@ fn solve(input: &String, factor: u64) -> String {
 
     let mut res: u64 = 0;
     for (i, (x1, y1)) in galaxies.iter().enumerate() {
-        for (j, (x2, y2)) in galaxies[i + 1..].iter().enumerate() {
+        for (x2, y2) in galaxies[i + 1..].iter() {
             res += manhattan_distance(*x1 as i32, *y1 as i32, *x2 as i32, *y2 as i32);
             let ys = if *y1 < *y2 { (*y1, *y2) } else { (*y2, *y1) };
             res += empty_rows.iter().filter(|x| **x > *x1 && **x < *x2).count() as u64 * (factor - 1);
