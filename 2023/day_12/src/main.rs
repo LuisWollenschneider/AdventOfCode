@@ -29,8 +29,8 @@ fn part_2(input: &String) -> String {
 }
 
 struct Springs {
-    records: String,
-    groups: Vec<u64>
+    records: Vec<char>,
+    groups: Vec<usize>
 }
 
 impl Springs {
@@ -39,89 +39,73 @@ impl Springs {
         let groups = self.groups.clone();
         for _ in 1..5 {
             self.records.push('?');
-            self.records += &records;
+            self.records.extend(records.clone());
             self.groups.extend(groups.clone());
         }
         self
     }
 
     fn combinations(&self) -> u64 {
-        let records = self.records.clone();
-        let remaining_groups = self.groups.clone();
+        let mut map: HashMap<usize, u64> = HashMap::new();
+        map.insert(0, 1);
 
-
-        let mut map: HashMap<String, u64> = HashMap::new();
-        map.insert(records, 1);
-
-        self.combinations_rec(map, &remaining_groups)
-    }
-
-    fn combinations_rec(&self,
-                         mut map: HashMap<String, u64>,
-                         remaining_groups: &Vec<u64>) -> u64 {
-        if remaining_groups.len() == 0 {
-            // all groups are placed
-            return map
-                .iter()
-                .filter(|(k, _)| k.chars().all(|c| c != '#'))
-                .map(|(_, v)| v)
-                .sum::<u64>()
-        }
-
-        let group: u64 = remaining_groups[0];
-        let remaining_groups: Vec<u64> = remaining_groups[1..].to_vec();
-
-        let mut grouped_map: HashMap<String, u64> = HashMap::new();
-        for (key, value) in map.iter_mut() {
-            let mut rkey = key.clone();
-            while !rkey.is_empty() {
-                if rkey.starts_with('.') {
-                    rkey.remove(0);
-                    continue
-                }
-
-                let first_dot = rkey.find('.').unwrap_or(rkey.len());
-                if first_dot < group as usize {
-                    if first_dot == rkey.len() {
-                        break
+        for group in self.groups.iter() {
+            let mut grouped_map: HashMap<usize, u64> = HashMap::new();
+            for (k, value) in map.iter() {
+                let mut k = *k;
+                while k + *group <= self.records.len() {
+                    if self.records[k] == '.' {
+                        k += 1;
+                        continue
                     }
 
-                    if rkey[..first_dot + 1].chars().any(|c| c == '#') {
-                        break
+                    let next_dot = self.records[k..].iter().position(|c| *c == '.').unwrap_or(usize::MAX);
+                    if next_dot < *group {
+                        if next_dot == usize::MAX {
+                            break
+                        }
+
+                        if self.records[k..k + next_dot + 1].iter().any(|c| *c == '#') {
+                            break
+                        }
+
+                        k += next_dot + 1;
+                        continue
                     }
 
-                    rkey = rkey[first_dot + 1..].to_string();
-                    continue
-                }
+                    let next_char = if *group + k < self.records.len() { self.records[*group + k] } else { '.' };
+                    if next_char == '#' {
+                        if self.records[k] == '#' {
+                            break
+                        }
+                        k += 1;
+                        continue
+                    }
 
-                let mut new_key = "".to_string();
-                let next_char = rkey.chars().nth(group as usize).unwrap_or('.');
-                if group + 1 < rkey.len() as u64 {
-                    new_key += &rkey[group as usize + 1..];
-                }
+                    let mut new_key = self.records.len();
+                    if k + *group + 1 < self.records.len() {
+                        new_key = k + *group + 1 + self.records[k + *group + 1..].iter().position(|c| *c != '.').unwrap_or(0);
+                    }
 
-                if next_char == '#' {
-                    if rkey.starts_with('#') {
+                    let entry = grouped_map.entry(new_key).or_insert(0);
+                    *entry += value;
+
+                    if self.records[k] == '#' {
                         break
                     }
-                    rkey.remove(0);
-                    continue
+                    k += 1;
                 }
-
-                if grouped_map.contains_key(&new_key) {
-                    grouped_map.insert(new_key.clone(), grouped_map[&new_key] + *value);
-                } else {
-                    grouped_map.insert(new_key, *value);
-                }
-
-                if rkey.starts_with('#') {
-                    break
-                }
-                rkey.remove(0);
             }
+
+            map = grouped_map;
         }
 
-        self.combinations_rec(grouped_map, &remaining_groups)
+        let last = self.records.iter().rposition(|c| *c == '#').unwrap_or(0);
+
+        map.iter()
+            .filter(|(k, _)| **k > last)
+            .map(|(_, v)| v)
+            .sum::<u64>()
     }
 }
 
@@ -130,11 +114,11 @@ fn parse(input: &String) -> Vec<Springs> {
         .lines()
         .map(|line| {
             let (records, groups) = line.split_once(' ').unwrap();
-            let groups: Vec<u64> = groups
+            let groups: Vec<usize> = groups
                 .split(",")
-                .map(|group| group.parse::<u64>().unwrap())
+                .map(|group| group.parse::<usize>().unwrap())
                 .collect();
-            let records: String = records.to_string();
+            let records: Vec<char> = records.chars().collect();
             Springs { records, groups }
         })
         .collect()
