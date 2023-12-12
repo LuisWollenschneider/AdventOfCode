@@ -4,14 +4,14 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 
 ## Summary
 
-| Year          | Stars ⭐️ | Languages                                   |
-|---------------|----------|---------------------------------------------|
-| [2023](#2023) | **24**   | ![Rust][rust-logo] / ![Python][python-logo] |
-| [2022](#2022) | **50**   | ![C++][cpp-logo] / ![Python][python-logo]   |
-| [2021](#2021) | **42**   | ![Python][python-logo]                      |
-| [2020](#2020) | **32**   | ![Python][python-logo]                      |
-| [2019](#2019) | **3**    | ![Python][python-logo]                      |
-| [2018](#2018) | **6**    | ![Python][python-logo]                      |
+| Year          | Stars ⭐️  | Languages                                   |
+|---------------|-----------|---------------------------------------------|
+| [2023](#2023) | **24**    | ![Rust][rust-logo] / ![Python][python-logo] |
+| [2022](#2022) | **50** 🌟 | ![C++][cpp-logo] / ![Python][python-logo]   |
+| [2021](#2021) | **42**    | ![Python][python-logo]                      |
+| [2020](#2020) | **32**    | ![Python][python-logo]                      |
+| [2019](#2019) | **3**     | ![Python][python-logo]                      |
+| [2018](#2018) | **6**     | ![Python][python-logo]                      |
 
 ## 2023
 
@@ -126,8 +126,10 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 | 2   | ![Python][python-logo] [Solution](2018/day_02.py) |
 | 3   | ![Python][python-logo] [Solution](2018/day_03.py) |
 
-
 [rust-logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Rust_programming_language_black_logo.svg/14px-Rust_programming_language_black_logo.svg.png
+
 [python-logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png
+
 [cpp-logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/14px-ISO_C%2B%2B_Logo.svg.png
+
 [aoc-url]: https://adventofcode.com/
