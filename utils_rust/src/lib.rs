@@ -1,9 +1,8 @@
-#[allow(dead_code)]
+#![allow(dead_code)]
 pub mod utils {
     use std::fs::File;
     use std::io::{BufRead, BufReader, Read, Write};
     use std::io;
-    use regex::Regex;
 
     const BLUE: &str = "\x1b[94m";
     const RED: &str = "\x1b[91m";
@@ -102,12 +101,6 @@ pub mod utils {
         let mut resp = String::new();
         response.read_to_string(&mut resp).unwrap();
 
-        let re = Regex::new(r"article>(.*)</article").unwrap();
-        let resp = re.captures(&resp).unwrap()[1].to_string();
-        let re = Regex::new(r"<a href.*?</a>").unwrap();
-        let resp = re.replace_all(&resp, "");
-        let resp = resp.replace("<p>", "").replace("</p>", "");
-
         if resp.contains("That's the right answer") {
             println!("{}That's the right answer!{}", YELLOW, RESET);
         } else if resp.contains("That's not the right answer") {
@@ -160,6 +153,7 @@ pub mod utils {
             .to_string();
 
         print!("{}Running tests for part {}{}{}...{} ", BLUE, PINK, part, BLUE, RESET);
+        io::stdout().flush().unwrap();
 
         let start = std::time::Instant::now();
         let test_result = func(&test_input);
@@ -192,6 +186,7 @@ pub mod utils {
 
 
         print!("{}Running part {}{}{}... {}", BLUE, PINK, part, BLUE, RESET);
+        io::stdout().flush().unwrap();
 
         let start = std::time::Instant::now();
         let result = func(&input);
@@ -201,7 +196,8 @@ pub mod utils {
 
         println!("{}Duration: {}{}", DARK_ORANGE, format_time(duration), RESET);
 
-        println!("{}Submit answer {}{}{} for part {}{}{}? {}", BLUE, LIGHT_GREEN, result, BLUE, PINK, part, BLUE, RESET);
+        print!("{}Submit answer {}{}{} for part {}{}{}? {}", BLUE, LIGHT_GREEN, result, BLUE, PINK, part, BLUE, RESET);
+        io::stdout().flush().unwrap();
 
         let mut inp = String::new();
         io::stdin().read_line(&mut inp).unwrap();
@@ -209,5 +205,6 @@ pub mod utils {
         if inp.trim().to_lowercase().eq("y") {
             submit_answer(year, day, part, result);
         }
+        println!("");
     }
 }
