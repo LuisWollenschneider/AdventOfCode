@@ -42,8 +42,6 @@ impl Springs {
             self.records += &records;
             self.groups.extend(groups.clone());
         }
-        self.total_springs *= 5;
-
         self
     }
 
