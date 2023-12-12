@@ -28,7 +28,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 | 9   | ![Rust][rust-logo] [Solution](2023/day_09/src/main.rs)                                                     |
 | 10  | ![Rust][rust-logo] [Solution](2023/day_10/src/main.rs)                                                     |
 | 11  | ![Rust][rust-logo] [Solution](2023/day_11/src/main.rs)                                                     |
-| 11  | ![Rust][rust-logo] [Solution](2023/day_12/src/main.rs)                                                     |
+| 12  | ![Rust][rust-logo] [Solution](2023/day_12/src/main.rs)                                                     |
 
 ## 2022
 
