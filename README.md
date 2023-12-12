@@ -9,7 +9,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 | [2023](#2023) | **24**   | ![Rust][rust-logo] / ![Python][python-logo] |
 | [2022](#2022) | **50**   | ![C++][cpp-logo] / ![Python][python-logo]   |
 | [2021](#2021) | **42**   | ![Python][python-logo]                      |
-| [2020](#2020) | **31**   | ![Python][python-logo]                      |
+| [2020](#2020) | **32**   | ![Python][python-logo]                      |
 | [2019](#2019) | **3**    | ![Python][python-logo]                      |
 | [2018](#2018) | **6**    | ![Python][python-logo]                      |
 
@@ -100,7 +100,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 | 4   | ![Python][python-logo] [Solution](2020/day_04.py) |
 | 5   | ![Python][python-logo] [Solution](2020/day_05.py) |
 | 6   | ![Python][python-logo] [Solution](2020/day_06.py) |
-| 7   | ![Python][python-logo] [Part 1](2020/day_07.py)   |
+| 7   | ![Python][python-logo] [Solution](2020/day_07.py) |
 | 8   | ![Python][python-logo] [Solution](2020/day_08.py) |
 | 9   | ![Python][python-logo] [Solution](2020/day_09.py) |
 | 10  | ![Python][python-logo] [Solution](2020/day_10.py) |
