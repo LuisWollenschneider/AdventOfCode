@@ -45,7 +45,6 @@ impl Mirrors {
     fn new_score(&mut self) -> u64 {
         let h = self.new_horizontal();
         if h == 0 {
-            self.flip();
             self.new_vertical()
         } else {
             h * 100
@@ -69,7 +68,8 @@ impl Mirrors {
         self.horizontal()
     }
 
-    fn new_vertical(&self) -> u64 {
+    fn new_vertical(&mut self) -> u64 {
+        self.flip();
         self.new_horizontal()
     }
 
@@ -108,12 +108,4 @@ fn parse(input: &String) -> Vec<Mirrors> {
             Mirrors { pattern }
         })
         .collect()
-}
-
-fn abs(a: u64, b: u64) -> u64 {
-    if a > b {
-        a - b
-    } else {
-        b - a
-    }
 }
