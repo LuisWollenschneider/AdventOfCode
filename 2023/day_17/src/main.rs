@@ -1,4 +1,5 @@
-use std::collections::{HashMap, VecDeque};
+use std::cmp::Ordering;
+use std::collections::{HashMap, BinaryHeap};
 use utils_rust::utils::wrapper;
 
 const DAY: i32 = 17;
@@ -24,76 +25,90 @@ fn part_2(input: &String) -> String {
     min_path(&heatmap, width, height, 4, 10).to_string()
 }
 
+#[derive(Eq, PartialEq)]
+struct Node {
+    x: i64,
+    y: i64,
+    heat_loss: i64,
+    dir: bool, // true = horizontal, false = vertical
+}
+
+impl Ord for Node {
+    fn cmp(&self, other: &Self) -> Ordering {
+        self.heat_loss.cmp(&other.heat_loss)
+    }
+}
+
+impl PartialOrd for Node {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(other.cmp(self))
+    }
+}
+
 fn min_path(map: &HashMap<(i64, i64), i64>, width: i64, height: i64, min: i64, max: i64) -> i64 {
     let mut min_heat_map_horizontally: HashMap<(i64, i64), i64> = HashMap::new();
     let mut min_heat_map_vertically: HashMap<(i64, i64), i64> = HashMap::new();
 
-    //                        x, y, hor/vert, heat loss
-    let mut dqueue: VecDeque<(i64, i64, bool, i64)> = VecDeque::new();
-    dqueue.push_back((0, 0, true, 0));
-    dqueue.push_back((0, 0, false, 0));
+    let mut pqueue: BinaryHeap<Node> = BinaryHeap::new();
 
-    let mut min_heat: i64 = i64::MAX;
+    pqueue.push(Node { x: 0, y: 0, heat_loss: 0, dir: true });
+    pqueue.push(Node { x: 0, y: 0, heat_loss: 0, dir: false });
 
-    while !dqueue.is_empty() {
-        let (x, y, dir, hl) = dqueue.pop_front().unwrap();
+    while !pqueue.is_empty() {
+        let node: Node = pqueue.pop().unwrap();
 
-        if x < 0 || x >= width || y < 0 || y >= height {
+        if node.x < 0 || node.x >= width || node.y < 0 || node.y >= height {
             continue;
         }
 
-        let heat_loss: i64 = hl;
-
-        if x == width - 1 && y == height - 1 && heat_loss < min_heat {
-            min_heat = heat_loss;
-            println!("Heat loss: {}, queue: {}", heat_loss, dqueue.len());
-            continue;
+        if node.x == width - 1 && node.y == height - 1 {
+            return node.heat_loss;
         }
 
-        if dir {
-            if heat_loss >= *min_heat_map_horizontally.get(&(x, y)).unwrap_or(&i64::MAX) {
+        if node.dir {
+            if node.heat_loss >= *min_heat_map_horizontally.get(&(node.x, node.y)).unwrap_or(&i64::MAX) {
                 continue;
             }
-            min_heat_map_horizontally.insert((x, y), heat_loss);
+            min_heat_map_horizontally.insert((node.x, node.y), node.heat_loss);
 
-            let mut heat_loss_left: i64 = heat_loss;
-            let mut heat_loss_right: i64 = heat_loss;
+            let mut heat_loss_left: i64 = node.heat_loss;
+            let mut heat_loss_right: i64 = node.heat_loss;
 
             for i in 1..min {
-                heat_loss_right += map.get(&(x + i, y)).unwrap_or(&0);
-                heat_loss_left += map.get(&(x - i, y)).unwrap_or(&0);
+                heat_loss_right += map.get(&(node.x + i, node.y)).unwrap_or(&0);
+                heat_loss_left += map.get(&(node.x - i, node.y)).unwrap_or(&0);
             }
             for i in min..max + 1 {
-                heat_loss_right += map.get(&(x + i, y)).unwrap_or(&0);
-                dqueue.push_back((x + i, y, false, heat_loss_right));
+                heat_loss_right += map.get(&(node.x + i, node.y)).unwrap_or(&0);
+                pqueue.push(Node { x: node.x + i, y: node.y, heat_loss: heat_loss_right, dir: false });
 
-                heat_loss_left += map.get(&(x - i, y)).unwrap_or(&0);
-                dqueue.push_back((x - i, y, false, heat_loss_left));
+                heat_loss_left += map.get(&(node.x - i, node.y)).unwrap_or(&0);
+                pqueue.push(Node { x: node.x - i, y: node.y, heat_loss: heat_loss_left, dir: false });
             }
         } else {
-            if heat_loss >= *min_heat_map_vertically.get(&(x, y)).unwrap_or(&i64::MAX) {
+            if node.heat_loss >= *min_heat_map_vertically.get(&(node.x, node.y)).unwrap_or(&i64::MAX) {
                 continue;
             }
-            min_heat_map_vertically.insert((x, y), heat_loss);
+            min_heat_map_vertically.insert((node.x, node.y), node.heat_loss);
 
-            let mut heat_loss_up: i64 = heat_loss;
-            let mut heat_loss_down: i64 = heat_loss;
+            let mut heat_loss_up: i64 = node.heat_loss;
+            let mut heat_loss_down: i64 = node.heat_loss;
 
             for i in 1..min {
-                heat_loss_down += map.get(&(x, y + i)).unwrap_or(&0);
-                heat_loss_up += map.get(&(x, y - i)).unwrap_or(&0);
+                heat_loss_down += map.get(&(node.x, node.y + i)).unwrap_or(&0);
+                heat_loss_up += map.get(&(node.x, node.y - i)).unwrap_or(&0);
             }
             for i in min..max + 1 {
-                heat_loss_down += map.get(&(x, y + i)).unwrap_or(&0);
-                dqueue.push_back((x, y + i, true, heat_loss_down));
+                heat_loss_down += map.get(&(node.x, node.y + i)).unwrap_or(&0);
+                pqueue.push(Node { x: node.x, y: node.y + i, heat_loss: heat_loss_down, dir: true });
 
-                heat_loss_up += map.get(&(x, y - i)).unwrap_or(&0);
-                dqueue.push_back((x, y - i, true, heat_loss_up));
+                heat_loss_up += map.get(&(node.x, node.y - i)).unwrap_or(&0);
+                pqueue.push(Node { x: node.x, y: node.y - i, heat_loss: heat_loss_up, dir: true });
             }
         }
     }
 
-    min_heat
+    -1
 }
 
 fn parse(input: &String) -> (HashMap<(i64, i64), i64>, i64, i64) {
