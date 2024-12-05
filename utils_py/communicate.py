@@ -149,7 +149,7 @@ class AOCCommunicator:
 
         if ans is None:
             print(f"{DARK_ORANGE}Not Implemented!{RESET}")
-            return
+            exit(1)
 
         if self.debug:
             print(f"{GREEN}<DBG> {DARK_ORANGE}Time taken: {PINK}{format_time(end - start)}{RESET}")
