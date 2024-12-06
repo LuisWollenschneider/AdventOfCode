@@ -6,7 +6,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 
 | Year          | Stars ⭐️  | Languages                                   |
 |---------------|-----------|---------------------------------------------|
-| [2024](#2024) | **10**    | ![Python][python-logo]                      |
+| [2024](#2024) | **12**    | ![Python][python-logo]                      |
 | [2023](#2023) | **48**    | ![Rust][rust-logo] / ![Python][python-logo] |
 | [2022](#2022) | **50** 🌟 | ![C++][cpp-logo] / ![Python][python-logo]   |
 | [2021](#2021) | **42**    | ![Python][python-logo]                      |
@@ -23,6 +23,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 | 3   | ![Python][python-logo] [Solution](2024/day_03.py)                                                          |
 | 4   | ![Python][python-logo] [Solution](2024/day_04.py)                                                          |
 | 5   | ![Python][python-logo] [Solution](2024/day_05.py)                                                          |
+| 6   | ![Python][python-logo] [Solution](2024/day_06.py)                                                          |
 
 ## 2023
 
