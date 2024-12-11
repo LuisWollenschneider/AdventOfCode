@@ -232,7 +232,7 @@ def format_time(td: float) -> str:
     return res
 
 
-def aoc_comm(settings, level, *, debug=False):
+def aoc_comm(settings, level, *, debug: bool = False, test_case: bool = True):
     def deco(func):
         nonlocal settings
         session_cookie = AOCMiscUtil.get_cookie(settings['cookie-path'])
@@ -241,7 +241,8 @@ def aoc_comm(settings, level, *, debug=False):
         def wrapper():
             nonlocal comm
             nonlocal settings, level
-            comm.run_test(func, level, settings["year"], settings["day"])
+            if test_case:
+                comm.run_test(func, level, settings["year"], settings["day"])
             page = comm.get_input_file(settings['year'], settings['day'])
             print(f"{BLUE}Running level {PINK}{level}{BLUE}...{RESET}", end=" ")
             start = time.time()
