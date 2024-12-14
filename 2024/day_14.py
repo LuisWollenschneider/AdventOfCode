@@ -57,25 +57,6 @@ def solve_l1(input_str) -> Optional[int]:  # input data will be passed to this a
     return s
 
 
-def brail(brailList):
-    if len(brailList) == 8:
-        brailHelperList = [
-            0x01, 0x08,
-            0x02, 0x10,
-            0x04, 0x20,
-            0x40, 0x80
-        ]
-        brailNum = 0x0
-        for t, num in zip(brailList, brailHelperList):
-            if t:
-                brailNum += num
-        stringToReturn = "28"+str(hex(brailNum))[2:]
-        return int(stringToReturn, 16)
-    else:
-        return 41
-
-
-
 @aoc_comm(settings, level=2, test_case=False)
 def solve_l2(input_str) -> Optional[int]:
     robots = parse_input(input_str)
