@@ -46,7 +46,7 @@ def bfs(start, end, size, obstacles):
         new_path = path.copy() + [pos]
 
         if pos == end:
-            return d
+            return path
 
         for i, j in [(0, 1), (0, -1), (1, 0), (-1, 0)]:
             new_pos = (pos[0] + i, pos[1] + j)
@@ -56,7 +56,7 @@ def bfs(start, end, size, obstacles):
 
 
 @aoc_comm(settings, level=1)
-def solve_l1(input_str) -> Optional[str]:  # input data will be passed to this as string
+def solve_l1(input_str) -> Optional[int]:  # input data will be passed to this as string
     coords = parse_input(input_str)
 
     if len(coords) == 25:
@@ -66,7 +66,7 @@ def solve_l1(input_str) -> Optional[str]:  # input data will be passed to this a
         size = 70
         first_n = 1024
 
-    return bfs((0, 0), (size, size), size, coords[:first_n])
+    return len(bfs((0, 0), (size, size), size, coords[:first_n]))
 
 
 @aoc_comm(settings, level=2)
@@ -78,11 +78,18 @@ def solve_l2(input_str) -> Optional[str]:
     else:
         size = 70
 
-    first_n = 0
+    obstacles = []
     while True:
-        if bfs((0, 0), (size, size), size, coords[:first_n]) is None:
-            return ','.join(map(str, coords[first_n - 1]))
-        first_n += 1
+        path = bfs((0, 0), (size, size), size, obstacles)
+        if path is None:
+            return ','.join(map(str, obstacles[-1]))
+
+        # add obstacles until the original path is blocked
+        while coords:
+            new_obstacle = coords.pop(0)
+            obstacles.append(new_obstacle)
+            if new_obstacle in path:
+                break
 
 
 def main():
