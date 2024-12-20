@@ -16,7 +16,6 @@ from math import *
 import functools
 import itertools
 from queue import PriorityQueue
-from tqdm import tqdm
 
 
 def parse_input(inp_content):
@@ -49,9 +48,6 @@ def bfs(start: list[tuple], end, size: tuple, walls):
     while not queue.empty():
         d, pos = queue.get()
 
-        # if max_distance is not None and distance(pos, end) + d > max_distance:
-        #     continue
-
         if pos[0] < 0 or pos[0] >= size[0] or pos[1] < 0 or pos[1] > size[1]:
             continue
         if pos in walls:
@@ -67,7 +63,7 @@ def bfs(start: list[tuple], end, size: tuple, walls):
             new_pos = (pos[0] + i, pos[1] + j)
             queue.put((d + 1, new_pos))
 
-    return None, None
+    return visited, None
 
 
 def distance(a, b):
@@ -87,43 +83,35 @@ def solve(input_str, cheat_duration, threshold: tuple):
 
     max_distance = d - threshold[test_input]
 
-    rem_path, _ = bfs([(0, end)], start, size, walls)
+    rem_path, _ = bfs([(0, end)], (-1, -1), size, walls)
 
     faster_routes = 0
     for p, pd in visited.items():
-        if distance(p, end) + pd <= d:
-            to_try = {(p, pd)}
-            s = {p}
-            for i in range(cheat_duration):
-                new_s = set(itertools.chain(*map(step, s)))
-                for ns in new_s.difference(s):
-                    to_try.add((ns, pd + i + 1))
-                s |= new_s
-
-            for sp, sd in to_try:
-                if sp in rem_path:
-                    if rem_path[sp] + sd < max_distance:
-                        faster_routes += 1
+        if distance(p, end) + pd > d:
+            continue
+        s = {p}
+        prev = s
+        for i in range(cheat_duration):
+            new_s = set(itertools.chain(*map(step, prev)))
+            for ns in new_s.difference(s):
+                if ns not in rem_path:
                     continue
-
-                # not precalculated
-                _, new_d = bfs([(0, sp)], end, size, walls)
-                if new_d is None:
-                    continue
-                if new_d + sd <= max_distance:
+                if rem_path[ns] + pd + i + 1 <= max_distance:
                     faster_routes += 1
+            s |= new_s
+            prev = new_s
 
     return faster_routes
 
 
 @aoc_comm(settings, level=1)
 def solve_l1(input_str) -> Optional[int]:  # input data will be passed to this as string
-    return solve(input_str, 2, (100, 0))
+    return solve(input_str, 2, (100, 1))
 
 
 @aoc_comm(settings, level=2)
 def solve_l2(input_str) -> Optional[int]:
-    return solve(input_str, 20, (99, 49))
+    return solve(input_str, 20, (100, 50))
 
 
 def main():
