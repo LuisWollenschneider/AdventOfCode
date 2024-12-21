@@ -232,7 +232,7 @@ def format_time(td: float) -> str:
     return res
 
 
-def aoc_comm(settings, level, *, debug: bool = False, test_case: bool = True):
+def aoc_comm(settings, level, *, debug: bool = False, test_case: bool = True, previous_attempts: list = None):
     def deco(func):
         nonlocal settings
         session_cookie = AOCMiscUtil.get_cookie(settings['cookie-path'])
@@ -251,8 +251,11 @@ def aoc_comm(settings, level, *, debug: bool = False, test_case: bool = True):
             print(f"{BLUE}Done!{RESET}")
             if debug:
                 print(f"{GREEN}<DBG> {DARK_ORANGE}Time taken: {PINK}{format_time(end - start)}{RESET}")
+            if previous_attempts and (ans in previous_attempts):
+                print(f"{DARK_ORANGE}Answer {LIGHT_GREEN}{ans}{DARK_ORANGE} already submitted for part {PINK}{level}{RESET} ({RED}WRONG{RESET})")
+                return
             if (ans is None) or ("y" != input(f"{BLUE}Submit answer {LIGHT_GREEN}{ans}{BLUE} for part {PINK}{level}{BLUE}?{RESET} ")):
-                print(f"{DARK_ORANGE}Answer for level - {PINK}{level}{DARK_ORANGE} not submitted{RESET}")
+                print(f"{DARK_ORANGE}Answer for part {PINK}{level}{DARK_ORANGE} not submitted{RESET}")
             else:
                 response = comm.submit_answer(settings['year'], settings['day'], level, ans)
                 resp = f"{ORANGE}Response from AoC:{RESET} "
@@ -262,6 +265,10 @@ def aoc_comm(settings, level, *, debug: bool = False, test_case: bool = True):
                     print(resp + f"{RED}That's not the right answer!{RESET}")
                 elif "Did you already complete it?" in response:
                     print(resp + f"{DARK_ORANGE}Already submitted!{RESET}")
+                elif "You gave an answer too recently" in response:
+                    print(resp + f"{RED}You gave an answer too recently{RESET}")
+                    wait_time = response.split("trying again.")[1].strip()
+                    print(f"{DARK_ORANGE}{wait_time}{RESET}")
                 else:
                     print(resp + f"{RED}Unknown response:{RESET}")
                     print(response)
