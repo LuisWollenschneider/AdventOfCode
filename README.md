@@ -5,49 +5,56 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 ## Summary
 
 | Year          | Stars ⭐️  | Languages                                   |
-|---------------|-----------|---------------------------------------------|
-| [2024](#2024) | **50**    | ![Python][python-logo]                      |
-| [2023](#2023) | **48**    | ![Rust][rust-logo] / ![Python][python-logo] |
+| ------------- | -------- | ------------------------------------------- |
+| [2025](#2025) | **2**    | ![TypeScript][ts-logo]                      |
+| [2024](#2024) | **50** 🌟 | ![Python][python-logo]                      |
+| [2023](#2023) | **48**   | ![Rust][rust-logo] / ![Python][python-logo] |
 | [2022](#2022) | **50** 🌟 | ![C++][cpp-logo] / ![Python][python-logo]   |
-| [2021](#2021) | **42**    | ![Python][python-logo]                      |
-| [2020](#2020) | **34**    | ![Python][python-logo]                      |
-| [2019](#2019) | **3**     | ![Python][python-logo]                      |
-| [2018](#2018) | **6**     | ![Python][python-logo]                      |
+| [2021](#2021) | **42**   | ![Python][python-logo]                      |
+| [2020](#2020) | **34**   | ![Python][python-logo]                      |
+| [2019](#2019) | **3**    | ![Python][python-logo]                      |
+| [2018](#2018) | **6**    | ![Python][python-logo]                      |
+
+## 2025
+
+| Day | Solution                                          |
+| --- | ------------------------------------------------- |
+| 1   | ![TypeScript][ts-logo] [Solution](2025/day_01.ts) |
 
 ## 2024
 
-| Day | Solution                                                                                                   |
-|-----|------------------------------------------------------------------------------------------------------------|
-| 1   | ![Python][python-logo] [Solution](2024/day_01.py)                                                          |
-| 2   | ![Python][python-logo] [Solution](2024/day_02.py)                                                          |
-| 3   | ![Python][python-logo] [Solution](2024/day_03.py)                                                          |
-| 4   | ![Python][python-logo] [Solution](2024/day_04.py)                                                          |
-| 5   | ![Python][python-logo] [Solution](2024/day_05.py)                                                          |
-| 6   | ![Python][python-logo] [Solution](2024/day_06.py)                                                          |
-| 7   | ![Python][python-logo] [Solution](2024/day_07.py)                                                          |
-| 8   | ![Python][python-logo] [Solution](2024/day_08.py)                                                          |
-| 9   | ![Python][python-logo] [Solution](2024/day_09.py)                                                          |
-| 10  | ![Python][python-logo] [Solution](2024/day_10.py)                                                          |
-| 11  | ![Python][python-logo] [Solution](2024/day_11.py)                                                          |
-| 12  | ![Python][python-logo] [Solution](2024/day_12.py)                                                          |
-| 13  | ![Python][python-logo] [Solution](2024/day_13.py)                                                          |
-| 14  | ![Python][python-logo] [Solution](2024/day_14.py)                                                          |
-| 15  | ![Python][python-logo] [Solution](2024/day_15.py)                                                          |
-| 16  | ![Python][python-logo] [Solution](2024/day_16.py)                                                          |
-| 17  | ![Python][python-logo] [Solution](2024/day_17.py)                                                          |
-| 18  | ![Python][python-logo] [Solution](2024/day_18.py)                                                          |
-| 19  | ![Python][python-logo] [Solution](2024/day_19.py)                                                          |
-| 20  | ![Python][python-logo] [Solution](2024/day_20.py)                                                          |
-| 21  | ![Python][python-logo] [Solution](2024/day_21.py)                                                          |
-| 22  | ![Python][python-logo] [Solution](2024/day_22.py)                                                          |
-| 23  | ![Python][python-logo] [Solution](2024/day_23.py)                                                          |
-| 24  | ![Python][python-logo] [Solution](2024/day_24.py)                                                          |
-| 25  | ![Python][python-logo] [Solution](2024/day_25.py)                                                          |
+| Day | Solution                                          |
+| --- | ------------------------------------------------- |
+| 1   | ![Python][python-logo] [Solution](2024/day_01.py) |
+| 2   | ![Python][python-logo] [Solution](2024/day_02.py) |
+| 3   | ![Python][python-logo] [Solution](2024/day_03.py) |
+| 4   | ![Python][python-logo] [Solution](2024/day_04.py) |
+| 5   | ![Python][python-logo] [Solution](2024/day_05.py) |
+| 6   | ![Python][python-logo] [Solution](2024/day_06.py) |
+| 7   | ![Python][python-logo] [Solution](2024/day_07.py) |
+| 8   | ![Python][python-logo] [Solution](2024/day_08.py) |
+| 9   | ![Python][python-logo] [Solution](2024/day_09.py) |
+| 10  | ![Python][python-logo] [Solution](2024/day_10.py) |
+| 11  | ![Python][python-logo] [Solution](2024/day_11.py) |
+| 12  | ![Python][python-logo] [Solution](2024/day_12.py) |
+| 13  | ![Python][python-logo] [Solution](2024/day_13.py) |
+| 14  | ![Python][python-logo] [Solution](2024/day_14.py) |
+| 15  | ![Python][python-logo] [Solution](2024/day_15.py) |
+| 16  | ![Python][python-logo] [Solution](2024/day_16.py) |
+| 17  | ![Python][python-logo] [Solution](2024/day_17.py) |
+| 18  | ![Python][python-logo] [Solution](2024/day_18.py) |
+| 19  | ![Python][python-logo] [Solution](2024/day_19.py) |
+| 20  | ![Python][python-logo] [Solution](2024/day_20.py) |
+| 21  | ![Python][python-logo] [Solution](2024/day_21.py) |
+| 22  | ![Python][python-logo] [Solution](2024/day_22.py) |
+| 23  | ![Python][python-logo] [Solution](2024/day_23.py) |
+| 24  | ![Python][python-logo] [Solution](2024/day_24.py) |
+| 25  | ![Python][python-logo] [Solution](2024/day_25.py) |
 
 ## 2023
 
 | Day | Solution                                                                                                   |
-|-----|------------------------------------------------------------------------------------------------------------|
+| --- | ---------------------------------------------------------------------------------------------------------- |
 | 1   | ![Python][python-logo] [Solution](2023/day_01.py)                                                          |
 | 2   | ![Python][python-logo] [Solution](2023/day_02.py)                                                          |
 | 3   | ![Python][python-logo] [Solution](2023/day_03.py)                                                          |
@@ -77,7 +84,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 ## 2022
 
 | Day | Solution                                                                                     |
-|-----|----------------------------------------------------------------------------------------------|
+| --- | -------------------------------------------------------------------------------------------- |
 | 1   | ![Python][python-logo] [Solution](2022/day_01.py)                                            |
 | 2   | ![C++][cpp-logo] [Solution](2022/day_02.cpp)                                                 |
 | 3   | ![C++][cpp-logo] [Solution](2022/day_02.cpp)                                                 |
@@ -107,7 +114,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 ## 2021
 
 | Day | Solution                                          |
-|-----|---------------------------------------------------|
+| --- | ------------------------------------------------- |
 | 1   | ![Python][python-logo] [Solution](2021/day_01.py) |
 | 2   | ![Python][python-logo] [Solution](2021/day_02.py) |
 | 3   | ![Python][python-logo] [Solution](2021/day_03.py) |
@@ -137,7 +144,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 ## 2020
 
 | Day | Solution                                          |
-|-----|---------------------------------------------------|
+| --- | ------------------------------------------------- |
 | 1   | ![Python][python-logo] [Solution](2020/day_01.py) |
 | 2   | ![Python][python-logo] [Solution](2020/day_02.py) |
 | 3   | ![Python][python-logo] [Solution](2020/day_03.py) |
@@ -159,14 +166,14 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 ## 2019
 
 | Day | Solution                                          |
-|-----|---------------------------------------------------|
+| --- | ------------------------------------------------- |
 | 1   | ![Python][python-logo] [Solution](2019/day_01.py) |
 | 2   | ![Python][python-logo] [Part 1](2019/day_02.py)   |
 
 ## 2018
 
 | Day | Solution                                          |
-|-----|---------------------------------------------------|
+| --- | ------------------------------------------------- |
 | 1   | ![Python][python-logo] [Solution](2018/day_01.py) |
 | 2   | ![Python][python-logo] [Solution](2018/day_02.py) |
 | 3   | ![Python][python-logo] [Solution](2018/day_03.py) |
@@ -176,5 +183,7 @@ This repository contains my solutions to the [Advent of Code][aoc-url] challenge
 [python-logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/14px-Python-logo-notext.svg.png
 
 [cpp-logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/ISO_C%2B%2B_Logo.svg/14px-ISO_C%2B%2B_Logo.svg.png
+
+[ts-logo]: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/14px-Typescript_logo_2020.svg.png
 
 [aoc-url]: https://adventofcode.com/
