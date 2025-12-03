@@ -36,5 +36,5 @@ function part2(input: string): any | null {
     return c;
 }
 
-solve(part1, YEAR, DAY, 1);
-solve(part2, YEAR, DAY, 2);
+await solve(part1, YEAR, DAY, 1);
+await solve(part2, YEAR, DAY, 2);
