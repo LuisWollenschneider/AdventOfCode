@@ -87,6 +87,10 @@ export async function solve(part_func: (input: string) => any | null, year: numb
                 resolve(data.toString().trim());
             });
         });
+        if (expectedOutput.length === 0) {
+            console.error(`${RED}Expected output cannot be empty!${RESET}`);
+            process.exit(1);
+        }
         fs.writeFileSync(testResultPath, expectedOutput);
     }
     const testInput = fs.readFileSync(testFilePath, 'utf-8');
