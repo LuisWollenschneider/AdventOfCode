@@ -5,8 +5,8 @@ import re
 
 # --- update day/ year for each challenge
 settings = {
-    'day': ...,
-    'year': ...,
+    'day': <DAY>,
+    'year': <YEAR>,
     'cookie-path': os.path.realpath('../aoc_cookie.json')
 }
 

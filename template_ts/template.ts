@@ -1,7 +1,7 @@
 import { solve } from '../utils';
 
-const YEAR = ...;
-const DAY = ...;
+const YEAR = <YEAR>;
+const DAY = <DAY>;
 
 function parseInput(input: string): any {
     return input;

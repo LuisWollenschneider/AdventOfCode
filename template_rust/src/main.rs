@@ -1,7 +1,7 @@
 use utils_rust::utils::wrapper;
 
-const DAY: i32 = 1;
-const YEAR: i32 = 2023;
+const DAY: i32 = <DAY>;
+const YEAR: i32 = <YEAR>;
 
 #[warn(unused_variables)]
 fn main() {
