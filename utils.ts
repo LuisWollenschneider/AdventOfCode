@@ -62,7 +62,7 @@ async function submitAnswer(year: number, day: number, part: number, answer: str
     const text = await response.text();
     if (text.includes('That\'s the right answer!')) {
         console.log(`${YELLOW}That's the right answer!${RESET}`);
-    } else if (text.includes('That\'s not the right answer.')) {
+    } else if (text.includes('That\'s not the right answer;')) {
         console.log(`${RED}That's not the right answer!${RESET}`);
     } else if (text.includes('Did you already complete it?')) {
         console.log(`${DARK_ORANGE}Already submitted!${RESET}`);
